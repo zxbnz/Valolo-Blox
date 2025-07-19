@@ -3,7 +3,7 @@
 local Rayfield = loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
 
 local Window = Rayfield:CreateWindow({
-    Name = "Jailbird Script V1",
+    Name = "ValoloBlox Script | Nova",
     LoadingTitle = "Loading Script.",
     LoadingSubtitle = "by zxbnzlol1",
     Theme = "Default",
