@@ -950,18 +950,19 @@ MainTab:CreateToggle({
     end,
 })
 
-local Slider = Main:CreateSlider({
+local selectedLockOption = "Head"
+
+Main:CreateDropdown({
     Name = "Aimbot Lock Part",
-    Range = {1, #lockOptions},
-    Increment = 1,
-    Suffix = "", -- Optional: can add " Option"
-    CurrentValue = 1,
-    Flag = "LockPartSlider",
-    Callback = function(Value)
-        selectedLockOption = lockOptions[Value]
-        print("Selected Lock Option:", selectedLockOption)
+    Options = {"Head", "Chest", "Both"},
+    CurrentOption = "Head",
+    Flag = "LockPartDropdown",
+    Callback = function(Option)
+        selectedLockOption = Option
+        print("Selected Lock Part:", selectedLockOption)
     end,
 })
+
  
 local function getClosest(cframe)
     local ray = Ray.new(cframe.Position, cframe.LookVector).Unit
