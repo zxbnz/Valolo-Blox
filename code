@@ -938,6 +938,18 @@ MainTab:CreateToggle({
     end,
 })
 
+
+-- Toggle: Team Check On/Off
+MainTab:CreateToggle({
+    Name = "Enable Team Check",
+    CurrentValue = teamCheck,
+    Flag = "TeamCheckToggle",
+    Callback = function(Value)
+        teamCheck = Value
+        print("Team Check:", teamCheck)
+    end,
+})
+
 local Slider = Main:CreateSlider({
     Name = "Aimbot Lock Part",
     Range = {1, #lockOptions},
@@ -948,17 +960,6 @@ local Slider = Main:CreateSlider({
     Callback = function(Value)
         selectedLockOption = lockOptions[Value]
         print("Selected Lock Option:", selectedLockOption)
-    end,
-})
-
--- Toggle: Team Check On/Off
-MainTab:CreateToggle({
-    Name = "Enable Team Check",
-    CurrentValue = teamCheck,
-    Flag = "TeamCheckToggle",
-    Callback = function(Value)
-        teamCheck = Value
-        print("Team Check:", teamCheck)
     end,
 })
  
