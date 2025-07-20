@@ -950,7 +950,6 @@ MainTab:CreateToggle({
     end,
 })
 
-local selectedLockOption = "Head"
 
 Main:CreateDropdown({
     Name = "Aimbot Lock Part",
