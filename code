@@ -3,7 +3,8 @@ local fov = 100
 local smoothing = 0.03
 local predictionFactor = 0.1  -- Adjust this factor to improve prediction accuracy
 local highlightEnabled = false  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
-local lockPart = "Head"  -- Choose what part it locks onto. Ex. HumanoidRootPart or Head
+local lockOptions = {"Head", "Chest", "Both"}
+local selectedLockOption = "Head"
  
 local Toggle = false  -- Enable or disable toggle mode
 local ToggleKey = Enum.KeyCode.E  -- Choose the key for toggling aimbot lock
@@ -886,7 +887,7 @@ local NoclipToggle = MainTab:CreateToggle({
     end,
 })
 
-
+local flysigmasection = MainTab:CreateSection("Aim Assist")
 -- Create Toggle for aimbotEnabled
 MainTab:CreateToggle({
     Name = "Enable Aimassist",
@@ -934,6 +935,19 @@ MainTab:CreateToggle({
     Callback = function(Value)
         highlightEnabled = Value
         print("Highlight ESP:", highlightEnabled)
+    end,
+})
+
+local Slider = Main:CreateSlider({
+    Name = "Aimbot Lock Part",
+    Range = {1, #lockOptions},
+    Increment = 1,
+    Suffix = "", -- Optional: can add " Option"
+    CurrentValue = 1,
+    Flag = "LockPartSlider",
+    Callback = function(Value)
+        selectedLockOption = lockOptions[Value]
+        print("Selected Lock Option:", selectedLockOption)
     end,
 })
 
