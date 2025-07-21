@@ -1,8 +1,10 @@
+local teamCheck = false
 local fov = 100
 local smoothing = 0.03
 local predictionFactor = 0.1  -- Adjust this factor to improve prediction accuracy
 local highlightEnabled = false  -- Variable to enable or disable target highlighting. Change to False if using an ESP script.
-local lockPart = "Head"
+local lockOptions = {"Head", "Chest", "Both"}
+local selectedLockOption = "Head"
  
 local Toggle = false  -- Enable or disable toggle mode
 local ToggleKey = Enum.KeyCode.E  -- Choose the key for toggling aimbot lock
@@ -253,39 +255,19 @@ Storage.Name = "Highlight_Storage"
 -- Function to get the enemy team of the local player
 local function getEnemyTeam()
     -- Replace these with the actual team names in your game
-   local Players = game:GetService("Players")
-local lp = Players.LocalPlayer
-
-local ATTACKER_TEAM = "Atackers"
-local DEFENDER_TEAM = "Defenders"
-
-local myTeam
-local enemyTeam
-
-local function updateTeams()
-    if not lp.Team then
-        myTeam = nil
-        enemyTeam = nil
-        return
+    local ATTACKER_TEAM = "Atackers"
+    local DEFENDER_TEAM = "Defenders"
+    
+    if not lp.Team then return nil end
+    
+    if lp.Team.Name == ATTACKER_TEAM then
+        return DEFENDER_TEAM
+    elseif lp.Team.Name == DEFENDER_TEAM then
+        return ATTACKER_TEAM
     end
-
-    myTeam = lp.Team.Name
-
-    if myTeam == ATTACKER_TEAM then
-        enemyTeam = DEFENDER_TEAM
-    elseif myTeam == DEFENDER_TEAM then
-        enemyTeam = ATTACKER_TEAM
-    else
-        enemyTeam = nil
-    end
+    
+    return nil
 end
-
--- Initial update
-updateTeams()
-
--- React to team changes
-lp:GetPropertyChangedSignal("Team"):Connect(updateTeams)
-
 
 -- Function to check if a player is on the enemy team
 local function isEnemy(plr)
@@ -968,6 +950,17 @@ MainTab:CreateToggle({
     end,
 })
 
+
+Main:CreateDropdown({
+    Name = "Aimbot Lock Part",
+    Options = {"Head", "Chest", "Both"},
+    CurrentOption = "Head",
+    Flag = "LockPartDropdown",
+    Callback = function(Option)
+        selectedLockOption = Option
+        print("Selected Lock Part:", selectedLockOption)
+    end,
+})
 
  
 local function getClosest(cframe)
