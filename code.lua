@@ -950,17 +950,6 @@ MainTab:CreateToggle({
 })
 
 
-Main:CreateDropdown({
-    Name = "Aimbot Lock Part",
-    Options = {"Head", "Chest", "Both"},
-    CurrentOption = "Head",
-    Flag = "LockPartDropdown",
-    Callback = function(Option)
-        selectedLockOption = Option
-        print("Selected Lock Part:", selectedLockOption)
-    end,
-})
-
  
 local function getClosest(cframe)
     local ray = Ray.new(cframe.Position, cframe.LookVector).Unit
